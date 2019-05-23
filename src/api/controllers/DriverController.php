@@ -13,8 +13,8 @@ namespace App\api\controllers;
 
 use Slim\Http\UploadedFile;
 use Interop\Container\ContainerInterface;
-use App\api\models\TruckModel;
-use App\api\models\TruckDocumentModel;
+use App\api\models\DriverModel;
+// use App\api\models\TruckDocumentModel;
 
 require_once __DIR__ . '/../../constants/StatusCode.php';
 require_once __DIR__ .'/../services/DecodeToken.php';
@@ -25,7 +25,7 @@ require_once __DIR__ .'/../services/DecodeToken.php';
  * Contain two property($container,$settings) one constructor
  * and
  */
-class TruckController
+class DriverController
 {
     /**
      * Used to contain db instance
@@ -65,22 +65,22 @@ class TruckController
      *
      * @return object return response object with JSON format
      */
-    public function uploadTruckDetails($request, $response)
+    public function uploadDriverDetails($request, $response)
     {
         //get userID from token
         $id=decodeToken();
         //read input
         $body=$request->getParsedBody();
 
-        $truckType = $body['truckType'];
-        $manufacturedDate = $body['truckManufacturedDate'];
-        $licenceNumber = $body['licensePlateNumber'];
+        $driverName = $body['driverName'];
+        $driverLicenseNumber = $body['driverLicenseNumber'];
+        $driverLicenseType = $body['driverLicenseType'];
+        $licenseIssuedDate = $body['licenseIssuedDate'];
+        $licenseExpiryDate = $body['licenseExpiryDate'];
         //if required inputs are emty then return an error with an error message
-        if (empty($truckType) || empty($manufacturedDate) || empty($licenceNumber)) {
-            return $response->withJSON(
-                ['error' => true, 'message' => 'Enter the required field.'],
-                NOT_ACCEPTABLE
-            );
+        if (empty($driverName) || empty($driverLicenseNumber) || empty($driverLicenseType) || empty($licenseIssuedDate) || empty($licenseExpiryDate)) {
+            return $response->withJSON (
+                ['error' => true, 'message' => 'Enter the required field.'], NOT_ACCEPTABLE );
         }
         /**
          * Used to store value of valid inputs
@@ -89,21 +89,26 @@ class TruckController
          */
         $requestValue = array(
             "id"=>$id,
-            "truckType" => $truckType,
-            "manufacturedDate" => $manufacturedDate,
-            "licenceNumber" => $licenceNumber
+            "driverName" => $driverName,
+            "driverLicenseNumber" => $driverLicenseNumber,
+            "driverLicenseType" => $driverLicenseType,
+            "licenseIssuedDate" => $licenseIssuedDate,
+            "licenseExpiryDate" => $licenseExpiryDate
         );
         /**
          * Used to store instance of TruckModel
          *
          * @var Object
          */
-        $truckController=new TruckModel();
-        $value=$truckController->uploadTruckDetails($requestValue, $this->container);
+        $driverController = new DriverModel();
+        $value = $driverController->uploadDriverDetails($requestValue, $this->container);
+        print_r($value);
+        exit();
         /**
          * If the return value of the function is string then return response with
          * corosponding message of the value
          */
+
         if (is_string($value)) {
             /**
              * Used to store responseMessage setting
@@ -129,7 +134,7 @@ class TruckController
      *
      * @return object return response object with JSON format
      */
-    public function fetchTruckDetails($request, $response)
+    public function fetchDriverDetails($request, $response)
     {
         //get userID from token
         $id=decodeToken();
@@ -141,8 +146,8 @@ class TruckController
          *
          * @var Object
          */
-        $truckController=new TruckModel();
-        $value=$truckController->fetchTruckDetails($requestValue, $this->container);
+        $driverController=new DriverModel();
+        $value=$driverController->fetchDriverDetails($requestValue, $this->container);
     
         if (is_string($value)) {
             /**
@@ -157,6 +162,6 @@ class TruckController
                 $errorMessage[$value]['statusCode']
             );
         }
-        return $response->withJSON(['error' => false, 'trucks' => $value], SUCCESS_RESPONSE);
+        return $response->withJSON(['error' => false, 'drivers' => $value], SUCCESS_RESPONSE);
     }
 }

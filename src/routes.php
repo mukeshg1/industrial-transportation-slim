@@ -41,9 +41,12 @@ $app->group(
         $app->post(UPDATE_USER_INFORMATION_API_END_POINT, 'UserProfileController:updateUserProfile');
         $app->post(UPLOAD_DOCUMENT_API_END_POINT, 'DocumentsController:uploadDocument');
         $app->post(UPDATE_TRUCK_INFORMATION_API_END_POINT, 'TruckController:uploadTruckDetails');
+        $app->post(ADD_DRIVER_DETAILS_API_END_POINT, 'DriverController:uploadDriverDetails');
 
         $app->get(VIEW_DOCUMENT_API_END_POINT, 'DocumentsController:viewDocument');
-        $app->get(VIEW_TRUCK_DETAILS_API_END_POINT, 'TruckController:fetchTeuckDetails');
+        $app->get(VIEW_TRUCK_DETAILS_API_END_POINT, 'TruckController:fetchTruckDetails');
+        $app->get(VIEW_DRIVER_DETAILS_API_END_POINT, 'DriverController:fetchDriverDetails');
         $app->get(VIEW_USER_INFORMATION_API_END_POINT, 'UserProfileController:viewUserProfile');
+        
     }
 );

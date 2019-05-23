@@ -15,9 +15,9 @@ use App\api\services\CRUDOperation;
 /**
  * Contain
  */
-class TruckModel
+class DriverModel
 {
-    private $_layoutName="TruckLayout";
+    private $_layoutName="DriverLayout";
     /**
      * Insert the truck details into the db
      *
@@ -35,16 +35,18 @@ class TruckModel
          */
         $instance=new CRUDOperation();
         $fieldsName=array(
-            "LicenceNumber_xt"=>$requestValue['licenceNumber']
+            "DrivingLicenceNumber_xt"=>$requestValue['driverLicenseNumber']
         );
         $result=$instance->findRecord($this->_layoutName, $fieldsName, $container);
         //if same truck is not present in the db then insert the input into db
         if (is_string($result)) {
             $fieldsName=array(
-            "__fk_UserId_Owner_xn"=>$requestValue['id'],
-            "TruckType_xt"=>$requestValue['truckType'],
-            "ManufacturedDate_xd"=>$requestValue['manufacturedDate'],
-            "LicenceNumber_xt"=>$requestValue['licenceNumber']
+            "__kf_UserId_xn"=>$requestValue['id'],
+            "DrivingLicenceType_xt"=>$requestValue['driverLicenseType'],
+            "DrivingLicenceNumber_xt"=>$requestValue['driverLicenseNumber'],
+            "DrivingLicenceIssueDate_xd"=>$requestValue['licenseIssuedDate'],
+            "DrivingLicenceExpiryDate_xd"=>$requestValue['licenseExpiryDate'],
+            "DriverName_xt"=>$requestValue['driverName']
             );
             $result=$instance->createRecord($this->_layoutName, $fieldsName, $container);
             /**
@@ -55,9 +57,9 @@ class TruckModel
                 return $result;
             }
         } else {
-            return "TRUCK_ALREADY_REGISTERED";
+            return "DRIVER_ALREADY_REGISTERED";
         }
-        return "SUCCESSFULLY_REGISTER";
+        return "SUCCESSFULLY_REGISTERED";
     }
 
     /**
@@ -68,7 +70,7 @@ class TruckModel
      *
      * @return multiple types of return according to the situation
      */
-    public function fetchTruckDetails($requestValue, $container)
+    public function fetchDriverDetails($requestValue, $container)
     {
         /**
          * Used to store instance of CRUDOperation
@@ -77,7 +79,7 @@ class TruckModel
          */
         $crud=new CRUDOperation();
         $fieldsName=array(
-            "__fk_UserId_Owner_xn"=>$requestValue['id']
+            "__kf_UserId_xn"=>$requestValue['id']
         );
         $result=$crud->findRecord($this->_layoutName, $fieldsName, $container);
         return $result;

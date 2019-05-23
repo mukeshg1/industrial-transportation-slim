@@ -16,4 +16,6 @@
     define('UPDATE_USER_INFORMATION_API_END_POINT', '/update-user-information');
     define('VIEW_USER_INFORMATION_API_END_POINT', '/view-user-information');
     define('UPDATE_TRUCK_INFORMATION_API_END_POINT', '/update-truck-information');
+    define('ADD_DRIVER_DETAILS_API_END_POINT', '/add-driver-information');
     define('VIEW_TRUCK_DETAILS_API_END_POINT', '/fetch-truck-information');
+    define('VIEW_DRIVER_DETAILS_API_END_POINT', '/fetch-driver-information');

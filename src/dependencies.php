@@ -63,3 +63,6 @@
     $container['TruckController']=function ($c) {
         return new App\api\controllers\TruckController($c);
     };
+    $container['DriverController']=function ($c) {
+        return new App\api\controllers\DriverController($c);
+    };
