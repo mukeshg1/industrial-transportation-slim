@@ -5,8 +5,8 @@
  *
  * PHP version 5
  * 
- * @author  Original Author <wasifali591@gmail.com>
- * @version <GIT: wasifali591/industrial-transportation-slim>
+ * @author  Original Author <mukeshg@mindfiresolutions.com>
+ * @version <GIT: mukeshg1/industrial-transportation-slim>
  */
 namespace App\api\models;
 

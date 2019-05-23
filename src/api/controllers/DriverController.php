@@ -5,8 +5,8 @@
  *
  * PHP version 5
  *
- * @author  Original Author <wasifali591@gmail.com>
- * @version <GIT: wasifali591/industrial-transportation-slim>
+ * @author  Original Author <mukeshg@mindfiresolutions.com>
+ * @version <GIT: mukeshg1/industrial-transportation-slim>
  */
 
 namespace App\api\controllers;
@@ -53,7 +53,7 @@ class DriverController
     }
 
     /**
-     * Uoload truck details
+     * Upload driver details
      *
      * Rertrive the user id fom token. Take input and check for validate data,
      * return proper response in json format
@@ -96,7 +96,7 @@ class DriverController
             "licenseExpiryDate" => $licenseExpiryDate
         );
         /**
-         * Used to store instance of TruckModel
+         * Used to store instance of driverModel
          *
          * @var Object
          */
@@ -125,7 +125,7 @@ class DriverController
     }
 
     /**
-     * Fetch truck details
+     * Fetch driver details
      *
      * @param object $request  represents the current HTTP request received
      *                         by the web server
@@ -142,7 +142,7 @@ class DriverController
             "id"=>$id
         );
         /**
-         * Used to store instance of TruckModel
+         * Used to store instance of DriverModel
          *
          * @var Object
          */
